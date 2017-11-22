@@ -1,3 +1,5 @@
+// initial way to add tasks, not preferable because not separate functions for things
+
 function addTask() {
     var taskText = document.getElementById('taskinput').value;
     var taskDate = document.getElementById('dateinput').value;
@@ -29,11 +31,12 @@ function addTask() {
 var addBtn = document.getElementById('addbtn');
 addBtn.addEventListener('click', addTask);
 
+// tried to insert this into the Delete button onclick event, hoping it would erase localStorage, didn't work
 
-/* var tempTasks = getTasksFromLocalStorage();
-        for (var i = 0; i < tempTasks.length; i++) {
-            if (tempTasks[i].date === n.date && tempTasks[i].text === n.text) {
-                tempTasks.splice(i, 1);
-                localStorage.setItem("tasks", JSON.stringify(tempTasks));
-            }
-        }*/
+tempTasks = getTasksFromLocalStorage();
+for (var i = 0; i < tempTasks.length; i++) {
+    if (tempTasks[i].date === n.date && tempTasks[i].text === n.text) {
+        tempTasks.splice(i, 1);
+        localStorage.setItem("tasks", JSON.stringify(tempTasks));
+    }
+}
