@@ -24,7 +24,7 @@ function createTask() {
 
     if (validate(n)) {
         showTask(n);
-        addToLocalStorage(n);
+        store().addStorage(n);
     }
 }
 
@@ -39,36 +39,53 @@ function showTask(n) {
     newTask.innerHTML = '<br />' + taskText + '<br />' + taskDate + "<br />" + "<br />" + "<br />";
     newTask.appendChild(taskDel);
     newTask.className = 'col-xs-2 task';
-    newTask.classList.toggle('fade-in')
+    setTimeout(function () {
+        newTask.classList.toggle('fade-in')
+    }, 1);
 
     var taskPlace = document.getElementById('taskarea');
     taskPlace.appendChild(newTask);
 
     taskDel.addEventListener('click', function () {
+        var tempTasks;
         newTask.parentNode.removeChild(newTask);
+        tempTasks = store().getFromStorage();
+        for (var i = 0; i < tempTasks.length; i++) {
+            if (tempTasks[i].date === n.date && tempTasks[i].text === n.text) {
+                tempTasks.splice(i, 1);
+                localStorage.setItem("tasks", JSON.stringify(tempTasks));
+            }
+        }
     });
 }
 
-function addToLocalStorage(n) {
-    var storedTasks = JSON.parse(localStorage.getItem("tasks"));
-    if (storedTasks == null) {
-        storedTasks = [];
+var store = function () {
+    function addToLocalStorage(n) {
+        var storedTasks = JSON.parse(localStorage.getItem("tasks"));
+        if (storedTasks == null) {
+            storedTasks = [];
+        }
+        var taskText = n.text;
+        var taskDate = n.date;
+        var task1 = {
+            'text': taskText,
+            'date': taskDate
+        };
+        localStorage.setItem("task", JSON.stringify(task1));
+        storedTasks.push(task1);
+
+        localStorage.setItem("tasks", JSON.stringify(storedTasks));
     }
-    var taskText = n.text;
-    var taskDate = n.date;
-    var task1 = {
-        'text': taskText,
-        'date': taskDate
-    };
-    localStorage.setItem("task", JSON.stringify(task1));
-    storedTasks.push(task1);
 
-    localStorage.setItem("tasks", JSON.stringify(storedTasks));
-};
-
-function getTasksFromLocalStorage() {
-    var a = JSON.parse(localStorage.getItem("tasks"));
-    return a;
+    function getTasksFromLocalStorage() {
+        var a = JSON.parse(localStorage.getItem("tasks"));
+        return a;
+    }
+    
+    return {
+        addStorage: addToLocalStorage,
+        getFromStorage: getTasksFromLocalStorage
+    }
 }
 
 (function begin() {
@@ -78,7 +95,7 @@ function getTasksFromLocalStorage() {
 })()
 
 function load() {
-    var oldTasks = getTasksFromLocalStorage();
+    var oldTasks = store().getFromStorage();
     for (var i = 0; i < oldTasks.length; i++) {
         showTask(oldTasks[i]);
     }
