@@ -1,0 +1,56 @@
+/* add less later */
+
+body {
+    background-image: url(images/tile.jpg);
+}
+
+.row {
+    margin: 30px 0px 15px 0px;
+}
+
+.task {
+    background-image: url(images/notebg.png);
+    height: 150px;
+    margin-right: 2px;
+    overflow-y: auto;
+    font-family: 'Satisfy';
+}
+
+.fade {
+    -moz-transition: opacity 2s ease-in;
+    -o-transition: opacity 2s ease-in;
+    -webkit-transition: opacity 2s ease-in;
+    transition: opacity 2s ease-in;
+}
+
+.erase {
+    display: none;
+    text-align: center;
+}
+
+.task:hover .erase {
+    display: block;
+}
+
+#heading {
+    height: 50px;
+    text-align: center;
+}
+
+#input {
+    background-image: url(images/formbg.jpg);
+    width: 60%;
+}
+
+input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    text-align: center;
+    padding: 2px;
+}
+
+.btn {
+    background: transparent;
+    color: #848484;
+}
