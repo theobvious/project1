@@ -86,7 +86,7 @@ var store = function () {
         addStorage: addToLocalStorage,
         getFromStorage: getTasksFromLocalStorage
     }
-}
+};
 
 (function begin() {
     var addBtn = document.getElementById('addbtn');
