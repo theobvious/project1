@@ -35,13 +35,13 @@ function showTask(n) {
     var taskDel = document.createElement('i');
     taskDel.className = 'erase glyphicon glyphicon-trash';
     
-   // var taskEd = document.createElement('i');
-    //taskEd.className = 'edit glyphicon glyphicon-pencil';
+    var taskEd = document.createElement('i');
+    taskEd.className = 'edit glyphicon glyphicon-pencil';
 
     var newTask = document.createElement('div');
     newTask.innerHTML = '<br />' + taskText + '<br />' + taskDate + "<br />" + "<br />" + "<br />";
     newTask.appendChild(taskDel);
-    //newTask.appendChild(taskEd);
+    newTask.appendChild(taskEd);
     newTask.className = 'col-xs-2 task';
     setTimeout(function () {
         newTask.classList.toggle('fade-in')
@@ -63,19 +63,21 @@ function showTask(n) {
         }
     });
     
-   /* taskEd.addEventListener('click', function() {
+   taskEd.addEventListener('click', function() {
         var edTask = prompt("Change your text");
         newTask.innerHTML = '<br />' + edTask + '<br />' + taskDate + "<br />" + "<br />" + "<br />";
         newTask.appendChild(taskDel);
         newTask.appendChild(taskEd);
-        tempTasks = store().getFromStorage();
-        for (var i = 0; i < tempTasks.length; i++) {
+        var tempTasks = store().getFromStorage();
+        
+       for (var i = 0; i < tempTasks.length; i++) {            
             if (tempTasks[i].date === n.date && tempTasks[i].text === n.text) {
-                var a = tempTasks.splice(i);
-                tempTasks.push(store().addStorage(a));
+                tempTasks.splice(i);
+                var b = new Task(edTask, taskDate);
+                tempTasks.push(b);
                 localStorage.setItem("tasks", JSON.stringify(tempTasks));
             }
-        }*/
+        }
     });
 }
 
