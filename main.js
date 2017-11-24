@@ -5,6 +5,7 @@ function Task(text, date) {
     this.date = date;
 }
 
+// using RegEx for a strict date-time format as requested; simpler option would be to set input type to 'date' in the HTML
 function validate() {
     var taskText = document.getElementById('taskinput').value;
     var taskDate = document.getElementById('dateinput').value;
@@ -28,6 +29,7 @@ function createTask() {
     }
 }
 
+// task display function includes erase and edit options which affect the local storage
 function showTask(n) {
     var taskText = n.text;
     var taskDate = n.date;
@@ -81,6 +83,7 @@ function showTask(n) {
     });
 }
 
+// local storage functionality
 var store = function () {
     function addToLocalStorage(n) {
         var storedTasks = JSON.parse(localStorage.getItem("tasks"));
@@ -110,6 +113,7 @@ var store = function () {
     }
 };
 
+// retrieve old tasks from storage on reload
 (function begin() {
     var addBtn = document.getElementById('addbtn');
     addBtn.addEventListener('click', createTask);
