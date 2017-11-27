@@ -12,9 +12,9 @@ function validate() {
     var dateReg = /[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1]) (2[0-3]|[01][0-9]):[0-5][0-9]/;
 
     if (!taskDate.match(dateReg)) {
-        alert("Invalid date");
+        alert("Invalid date!");
     } else if (taskText == '') {
-        alert("All fields are required");
+        alert("No text!");
     } else {
         return true;
     }
@@ -46,11 +46,13 @@ function showTask(n) {
     newTask.appendChild(taskEd);
     newTask.className = 'col-xs-2 task';
     setTimeout(function () {
-        newTask.classList.toggle('fade-in')
-    }, 1);
+        newTask.classList.add('fade');}, 1);
 
     var taskPlace = document.getElementById('taskarea');
     taskPlace.appendChild(newTask);
+    
+    document.getElementById('taskinput').value = "";
+    document.getElementById('dateinput').value = "";
 
     taskDel.addEventListener('click', function () {
         var tempTasks;
