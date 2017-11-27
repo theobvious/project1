@@ -17,9 +17,10 @@ body {
     font-family: 'Satisfy';
 }
 
-.alert {
+.alerts {
     color: red;
-    font-family: 'Satisfy';
+    font-weight: 700;
+    font-family: 'Lato';
 }
 
 .fade {

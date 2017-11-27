@@ -9,12 +9,13 @@ function Task(text, date) {
 function validate() {
     var taskText = document.getElementById('taskinput').value;
     var taskDate = document.getElementById('dateinput').value;
+    var errors = document.getElementById('errors');
     var dateReg = /[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1]) (2[0-3]|[01][0-9]):[0-5][0-9]/;
 
     if (!taskDate.match(dateReg)) {
-        alert("Invalid date!");
+        errors.innerHTML += 'Invalid date!' + '<br />';
     } else if (taskText == '') {
-        alert("No text!");
+        errors.innerHTML += 'Please input text!' + '<br />';
     } else {
         return true;
     }
@@ -33,6 +34,7 @@ function createTask() {
 function showTask(n) {
     var taskText = n.text;
     var taskDate = n.date;
+    var errors = document.getElementById('errors');
 
     var taskDel = document.createElement('i');
     taskDel.className = 'erase glyphicon glyphicon-trash';
@@ -47,6 +49,7 @@ function showTask(n) {
     newTask.className = 'col-xs-2 task';
     setTimeout(function () {
         newTask.classList.add('fade');}, 1);
+    errors.innerHTML = "";
 
     var taskPlace = document.getElementById('taskarea');
     taskPlace.appendChild(newTask);
