@@ -15,8 +15,13 @@ body {
     font-family: 'Satisfy';
 }
 
+.glyphicon {
+    float: left;
+    margin-right: 7px;
+}
+
 .alerts {
-    color: red;
+    color: #f45642;
     font-weight: 700;
     font-family: 'Lato';
 }
