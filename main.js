@@ -38,7 +38,7 @@ function showTask(n) {
 
     var taskDel = document.createElement('i');
     taskDel.className = 'erase glyphicon glyphicon-trash';
-    
+
     var taskEd = document.createElement('i');
     taskEd.className = 'edit glyphicon glyphicon-pencil';
 
@@ -48,19 +48,22 @@ function showTask(n) {
     newTask.appendChild(taskEd);
     newTask.className = 'col-xs-2 task';
     setTimeout(function () {
-        newTask.classList.add('fade');}, 1);
+        newTask.classList.add('fade');
+    }, 1);
     errors.innerHTML = "";
 
     var taskPlace = document.getElementById('taskarea');
     taskPlace.appendChild(newTask);
-    
+
     document.getElementById('taskinput').value = "";
     document.getElementById('dateinput').value = "";
 
     taskDel.addEventListener('click', function () {
         var tempTasks;
         newTask.style.opacity = '0';
-        setTimeout(function() {newTask.parentNode.removeChild(newTask);}, 1000);
+        setTimeout(function () {
+            newTask.parentNode.removeChild(newTask);
+        }, 1000);
         tempTasks = store().getFromStorage();
         for (var i = 0; i < tempTasks.length; i++) {
             if (tempTasks[i].date === n.date && tempTasks[i].text === n.text) {
@@ -69,15 +72,15 @@ function showTask(n) {
             }
         }
     });
-    
-   taskEd.addEventListener('click', function() {
+
+    taskEd.addEventListener('click', function () {
         var edTask = prompt("Change your text");
         newTask.innerHTML = '<br />' + edTask + '<br />' + taskDate + "<br />" + "<br />" + "<br />";
         newTask.appendChild(taskDel);
         newTask.appendChild(taskEd);
         var tempTasks = store().getFromStorage();
-        
-       for (var i = 0; i < tempTasks.length; i++) {            
+
+        for (var i = 0; i < tempTasks.length; i++) {
             if (tempTasks[i].date === n.date && tempTasks[i].text === n.text) {
                 tempTasks.splice(i);
                 var b = new Task(edTask, taskDate);
@@ -111,7 +114,7 @@ var store = function () {
         var a = JSON.parse(localStorage.getItem("tasks"));
         return a;
     }
-    
+
     return {
         addStorage: addToLocalStorage,
         getFromStorage: getTasksFromLocalStorage
@@ -127,7 +130,9 @@ var store = function () {
 
 function load() {
     var oldTasks = store().getFromStorage();
-    for (var i = 0; i < oldTasks.length; i++) {
-        showTask(oldTasks[i]);
+    if (oldTasks != null) {
+        for (var i = 0; i < oldTasks.length; i++) {
+            showTask(oldTasks[i]);
+        }
     }
 }
